@@ -48,3 +48,14 @@ Let's Discuss about this project.
 
 Feel Free to Contact me !!
 """
+import sqlite3
+
+def get_user_data(user_id):
+    connection = sqlite3.connect('example.db')
+    cursor = connection.cursor()
+    # Vulnerable to SQL injection
+    query = f"SELECT * FROM users WHERE id = {user_id}"
+    cursor.execute(query)
+    result = cursor.fetchall()
+    connection.close()
+    return result
